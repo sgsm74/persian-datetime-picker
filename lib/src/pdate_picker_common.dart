@@ -1,4 +1,4 @@
-import 'dart:ui' show hashValues;
+import 'package:flutter/foundation.dart' show Object;
 
 import 'package:persian_datetime_picker/src/date/shamsi_date.dart';
 
@@ -15,10 +15,13 @@ import 'package:persian_datetime_picker/src/date/shamsi_date.dart';
 enum PDatePickerEntryMode {
   /// Tapping on a calendar.
   calendar,
+
   /// only calendar.
   calendarOnly,
+
   /// Text input.
   input,
+
   /// Text input only.
   inputOnly,
 }
@@ -83,7 +86,7 @@ class JalaliRange {
   }
 
   @override
-  int get hashCode => hashValues(start, end);
+  int get hashCode => Object.hash(start, end);
 
   @override
   String toString() => '$start - $end';
