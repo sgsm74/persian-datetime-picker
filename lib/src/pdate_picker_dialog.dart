@@ -102,9 +102,12 @@ Future<Jalali?> showPersianDatePicker({
   initialDate = utils.dateOnly(initialDate);
   firstDate = utils.dateOnly(firstDate);
   lastDate = utils.dateOnly(lastDate);
-  assert(!lastDate.isBefore(firstDate), 'lastDate $lastDate must be on or after firstDate $firstDate.');
-  assert(!initialDate.isBefore(firstDate), 'initialDate $initialDate must be on or after firstDate $firstDate.');
-  assert(!initialDate.isAfter(lastDate), 'initialDate $initialDate must be on or before lastDate $lastDate.');
+  assert(!lastDate.isBefore(firstDate),
+      'lastDate $lastDate must be on or after firstDate $firstDate.');
+  assert(!initialDate.isBefore(firstDate),
+      'initialDate $initialDate must be on or after firstDate $firstDate.');
+  assert(!initialDate.isAfter(lastDate),
+      'initialDate $initialDate must be on or before lastDate $lastDate.');
   assert(selectableDayPredicate == null || selectableDayPredicate(initialDate),
       'Provided initialDate $initialDate must satisfy provided selectableDayPredicate.');
   assert(debugCheckHasMaterialLocalizations(context));
@@ -322,7 +325,8 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
         ? _selectedDate!.formatFullDate()
         // TODO(darrenaustin): localize 'Date'
         : 'Date';
-    final Color dateColor = colorScheme.brightness == Brightness.light ? colorScheme.onPrimary : colorScheme.onSurface;
+    final Color dateColor =
+        colorScheme.brightness == Brightness.light ? colorScheme.onPrimary : colorScheme.onSurface;
     final TextStyle? dateStyle = orientation == Orientation.landscape
         ? textTheme.titleMedium?.copyWith(color: dateColor)
         : textTheme.headlineSmall?.copyWith(color: dateColor);
@@ -400,7 +404,8 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       case PDatePickerEntryMode.input:
         picker = Form(
           key: _formKey,
-          autovalidateMode: _autoValidate ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
+          autovalidateMode:
+              _autoValidate ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
           child: pInputDatePickerFormField(),
         );
         entryModeIcon = Icons.calendar_today;
@@ -411,7 +416,8 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       case PDatePickerEntryMode.inputOnly:
         picker = Form(
           key: _formKey,
-          autovalidateMode: _autoValidate ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
+          autovalidateMode:
+              _autoValidate ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
           child: pInputDatePickerFormField(),
         );
         // TODO(darrenaustin): localize 'Switch to calendar'
@@ -433,7 +439,6 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     );
 
     final Size dialogSize = _dialogSize(context)! * textScaleFactor;
-    final dialogTheme = Theme.of(context).dialogTheme;
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
       // The default dialog shape is radius 2 rounded rect, but the spec has
