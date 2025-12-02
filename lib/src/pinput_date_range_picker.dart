@@ -29,10 +29,8 @@ class PInputDateRangePicker extends StatefulWidget {
     this.fieldEndLabelText,
     this.autofocus = false,
     this.autovalidate = false,
-  })  : initialStartDate =
-            initialStartDate == null ? null : utils.dateOnly(initialStartDate),
-        initialEndDate =
-            initialEndDate == null ? null : utils.dateOnly(initialEndDate),
+  })  : initialStartDate = initialStartDate == null ? null : utils.dateOnly(initialStartDate),
+        initialEndDate = initialEndDate == null ? null : utils.dateOnly(initialEndDate),
         firstDate = utils.dateOnly(firstDate),
         lastDate = utils.dateOnly(lastDate),
         super(key: key);
@@ -172,15 +170,13 @@ class PInputDateRangePickerState extends State<PInputDateRangePicker> {
   String? _validateDate(Jalali? date) {
     if (date == null) {
       return widget.errorFormatText ?? 'تاریخ انتخاب شده معتبر نمی باشد.';
-    } else if (date.isBefore(widget.firstDate) ||
-        date.isAfter(widget.lastDate)) {
+    } else if (date.isBefore(widget.firstDate) || date.isAfter(widget.lastDate)) {
       return widget.errorInvalidText ?? 'تاریخ انتخاب شده معتبر نمی باشد.';
     }
     return null;
   }
 
-  void _updateController(
-      TextEditingController controller, String? text, bool selectText) {
+  void _updateController(TextEditingController controller, String? text, bool selectText) {
     TextEditingValue textEditingValue = controller.value.copyWith(text: text);
     if (selectText) {
       textEditingValue = textEditingValue.copyWith(
@@ -218,8 +214,7 @@ class PInputDateRangePickerState extends State<PInputDateRangePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final InputDecorationTheme inputTheme =
-        Theme.of(context).inputDecorationTheme;
+    final inputTheme = Theme.of(context).inputDecorationTheme;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

@@ -923,8 +923,9 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
 
   double _getThetaForTime(TimeOfDay time) {
     final int hoursFactor = widget.use24HourDials ? TimeOfDay.hoursPerDay : TimeOfDay.hoursPerPeriod;
-    final double fraction =
-        widget.mode == _TimePickerMode.hour ? (time.hour / hoursFactor) % hoursFactor : (time.minute / TimeOfDay.minutesPerHour) % TimeOfDay.minutesPerHour;
+    final double fraction = widget.mode == _TimePickerMode.hour
+        ? (time.hour / hoursFactor) % hoursFactor
+        : (time.minute / TimeOfDay.minutesPerHour) % TimeOfDay.minutesPerHour;
     return (math.pi / 2.0 - fraction * _kTwoPi) % _kTwoPi;
   }
 
@@ -1158,9 +1159,10 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
     final TimePickerThemeData pickerTheme = TimePickerTheme.of(context);
     final Color backgroundColor = pickerTheme.dialBackgroundColor ?? themeData.colorScheme.onBackground.withOpacity(0.12);
     final Color accentColor = pickerTheme.dialHandColor ?? themeData.colorScheme.primary;
-    final Color primaryLabelColor = MaterialStateProperty.resolveAs(pickerTheme.dialTextColor, <MaterialState>{}) ?? themeData.colorScheme.onSurface;
-    final Color secondaryLabelColor =
-        MaterialStateProperty.resolveAs(pickerTheme.dialTextColor, <MaterialState>{MaterialState.selected}) ?? themeData.colorScheme.onPrimary;
+    final Color primaryLabelColor =
+        MaterialStateProperty.resolveAs(pickerTheme.dialTextColor, <MaterialState>{}) ?? themeData.colorScheme.onSurface;
+    final Color secondaryLabelColor = MaterialStateProperty.resolveAs(pickerTheme.dialTextColor, <MaterialState>{MaterialState.selected}) ??
+        themeData.colorScheme.onPrimary;
     List<_TappableLabel>? primaryLabels;
     List<_TappableLabel>? secondaryLabels;
     int? selectedDialValue;
@@ -1325,7 +1327,8 @@ class _TimePickerInputState extends State<_TimePickerInput> {
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     final MediaQueryData media = MediaQuery.of(context);
-    final TimeOfDayFormat timeOfDayFormat = MaterialLocalizations.of(context).timeOfDayFormat(alwaysUse24HourFormat: media.alwaysUse24HourFormat);
+    final TimeOfDayFormat timeOfDayFormat =
+        MaterialLocalizations.of(context).timeOfDayFormat(alwaysUse24HourFormat: media.alwaysUse24HourFormat);
     final bool use24HourDials = hourFormat(of: timeOfDayFormat) != HourFormat.h;
     final ThemeData theme = Theme.of(context);
     final TextStyle? hourMinuteStyle = TimePickerTheme.of(context).hourMinuteTextStyle ?? theme.textTheme.displayMedium;
@@ -1550,7 +1553,7 @@ class _HourMinuteTextFieldState extends State<_HourMinuteTextField> {
     final TimePickerThemeData timePickerTheme = TimePickerTheme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
 
-    final InputDecorationTheme? inputDecorationTheme = timePickerTheme.inputDecorationTheme;
+    final inputDecorationTheme = timePickerTheme.inputDecorationTheme;
     InputDecoration inputDecoration;
     if (inputDecorationTheme != null) {
       inputDecoration = const InputDecoration().applyDefaults(inputDecorationTheme);
@@ -1805,11 +1808,15 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
         switch (orientation) {
           case Orientation.portrait:
             timePickerWidth = _kTimePickerWidthPortrait;
-            timePickerHeight = theme.materialTapTargetSize == MaterialTapTargetSize.padded ? _kTimePickerHeightPortrait : _kTimePickerHeightPortraitCollapsed;
+            timePickerHeight = theme.materialTapTargetSize == MaterialTapTargetSize.padded
+                ? _kTimePickerHeightPortrait
+                : _kTimePickerHeightPortraitCollapsed;
             break;
           case Orientation.landscape:
             timePickerWidth = _kTimePickerWidthLandscape * textScaleFactor;
-            timePickerHeight = theme.materialTapTargetSize == MaterialTapTargetSize.padded ? _kTimePickerHeightLandscape : _kTimePickerHeightLandscapeCollapsed;
+            timePickerHeight = theme.materialTapTargetSize == MaterialTapTargetSize.padded
+                ? _kTimePickerHeightLandscape
+                : _kTimePickerHeightLandscapeCollapsed;
             break;
         }
         break;
@@ -1877,7 +1884,8 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
       case PTimePickerEntryMode.dial:
       case PTimePickerEntryMode.dialOnly:
         final Widget dial = Padding(
-          padding: orientation == Orientation.portrait ? const EdgeInsets.symmetric(horizontal: 36, vertical: 24) : const EdgeInsets.all(24),
+          padding:
+              orientation == Orientation.portrait ? const EdgeInsets.symmetric(horizontal: 36, vertical: 24) : const EdgeInsets.all(24),
           child: ExcludeSemantics(
             child: AspectRatio(
               aspectRatio: 1.0,
